@@ -39,7 +39,7 @@ def filter_domains(domains, keyword):
     return [d for d in domains if keyword.lower() in d.lower()]
 
 def main():
-    parser = argparse.ArgumentParser(description='')
+    parser = argparse.ArgumentParser()
     parser.add_argument('domain', help='The target domain to search for.')
     parser.add_argument('--apikey', help='Your WhoisXML API key.')
     parser.add_argument('--keyword', help='A keyword filter to match domains.', default=None)
