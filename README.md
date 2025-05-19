@@ -17,7 +17,3 @@ Get a free API key at https://reverse-whois.whoisxmlapi.com. The free tier allow
 # Example
 `python reconflare.py medium.com --keyword medium --apikey yourapikeyhere`
 
-# TODO
-- [ ] Add domain filtering by registrar.
-- [ ] Add domain filtering by registrant name / organization.
-- [ ] Add bulk input support (multiple domains at once)
