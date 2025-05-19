@@ -14,6 +14,9 @@ pip install requests dnspython
 
 Get a free API key at https://reverse-whois.whoisxmlapi.com. The free tier allows 500 queries/month.
 
+After obtaining your key, you need to add it to the config.ini file.
+
+
 # Example
-`python reconflare.py medium.com --keyword medium --apikey yourapikeyhere`
+`python reconflare.py medium.com --keyword medium`
 
