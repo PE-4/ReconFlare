@@ -1,6 +1,7 @@
 import dns.resolver
 import requests
 import argparse
+import configparser
 
 def get_nameservers(domain):
     try:
@@ -38,19 +39,28 @@ def reverse_whois(ns_list, api_key):
 def filter_domains(domains, keyword):
     return [d for d in domains if keyword.lower() in d.lower()]
 
+def get_api_key():
+    config = configparser.ConfigParser()
+    config.read('config.ini')
+    return config.get('whoisxml', 'api_key')
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('domain', help='The target domain to search for.')
-    parser.add_argument('--apikey', help='Your WhoisXML API key.')
     parser.add_argument('--keyword', help='A keyword filter to match domains.', default=None)
     args = parser.parse_args()
+
+    api_key = get_api_key()
+    if not api_key:
+        print('[!] API key not found in config.ini.')
+        return
 
     ns_list = get_nameservers(args.domain)
     if not ns_list or not is_cloudflare_ns(ns_list):
         print('[!] Nameservers are not Cloudflare.')
         return
 
-    domains = reverse_whois(ns_list, args.apikey)
+    domains = reverse_whois(ns_list, api_key)
     if args.keyword:
         domains = filter_domains(domains, args.keyword)
 
